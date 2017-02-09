@@ -1,0 +1,165 @@
+<ion-view>
+    <ion-content>
+    </ion-content>
+    <ion-tabs class="tabs-assertive tabs-icon-only" >
+        <ion-tab title="Home" icon-on="icon ion-arrow-swap" icon-off="icon ion-arrow-swap">
+            <div class="row">
+                <div class="col">
+                    <a href="#/views/home"><i class="ion-ios-home" style="color: #FF9900; font-size: 40px;"></i></a>
+                </div>
+            </div>
+            <div class="text-center" >
+                <!-- ng-repeat="employeeData in empData" -->
+                <div>
+                    <a href="#/views/capture">
+                        <img src="" style="with:200px;height:200px" class="imgRadius">รูป
+                    </a>
+                </div>
+                <br>
+                <p style="font-size: 150%;">{{user.firstName}} {{user.lastName}}</p>
+                <br>
+                <div ng-repeat="items in user.Employeeprofile">
+                    <div class="row">
+                        <div class="col col-33">
+                            <i class="ion-android-arrow-dropright-circle" style="color: green; font-size: 80px;"></i>
+                        </div>
+                        <div class="col col-66 text-left">
+                            <h4 style="color: green; font-size: 45px;">{{items.dateTimeIn}}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-33">
+                            <i class="ion-android-arrow-dropleft-circle" style="color: red; font-size: 80px;"></i>
+                        </div>
+                        <div class="col col-66 text-left">
+                            <h4 style="color: red; font-size: 45px;">{{items.dateTimeOut}}</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- <p style="font-size: 150%;">Check In : 09:00 PM</p> -->
+            </div>
+        </ion-tab>
+        <ion-tab title="About" icon-on="icon ion-calendar" icon-off="icon ion-calendar">
+            <!-- Tab 2 content -->
+            <div class="row">
+                <div class="col">
+                    <a href="#/views/home"><i class="ion-ios-home" style="color: #FF9900; font-size: 40px;"></i></a>
+                </div>
+                <div class="col text-center">
+                    <h4 style="color: #FF9900;">History</h4>
+                </div>
+                <div class="col text-right">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col col-50 ">
+                    <canvas tc-chartjs-doughnut="" chart-options="options" chart-data="dataSummary" chart-legend="doughnutChart1"></canvas>
+                </div>
+                <div class="col col-10 text-center ">
+                    <i class="ion-android-checkbox-blank" style="color: #BBBBBB; font-size: 25px;"></i>
+                    <i class="ion-android-checkbox-blank" style="color: #00DD00; font-size: 25px;"></i>
+                    <i class="ion-android-checkbox-blank" style="color: #FF9900; font-size: 25px;"></i>
+                </div>
+                <div class="col col-40 text-left">
+                    <p>จำนวนวันคงเหลือ</p>
+                    <p>จำนวนวันที่ทำงาน</p>
+                    <p>จำนวนวันที่ลา</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col col-10">
+                </div>
+                <div class="col col-80 text-center">
+                    <div class="button-bar">
+                        <a class="button" ng-class="var==1?'button-balanced':'button-stable'" ng-click="click(1)">Worked</a>
+                        <a class="button" ng-class="var==2?'button-balanced':'button-stable'" ng-click="click(2)">Leaved</a>
+                    </div>
+                </div>
+                <div class="col col-10">
+                </div>
+            </div>
+            <div ng-show="var=='1'" class="scrollArea">
+                <div class="list ">
+                    <a href="#" class="item item-icon-left " style="background-color: #EEEEEE;" ng-repeat="item in CheckIn | orderBy:'-DateTimeIn' " ng-hide="chkDateInMonth(item.DateTimeIn)">
+                        <!--                         <i class="icon ion-ios-calendar-outline" style="color: #ff9900;"></i>
+                        <h2 style="font-weight: bold;">01 December 2015</h2>
+                        <div class="row">
+                        <i class="ion-android-arrow-dropright-circle" style="color: green; font-size: 20px;"></i><p>09.00 AM</p>
+                        <i class="ion-android-arrow-dropleft-circle" style="color: red; font-size: 20px;"></i><p>08.02 PM</p>
+                        </div> -->
+                        <i class="icon ion-android-calendar" style="color: #ff9900;"></i>
+                        <h2 style="font-weight: bold;">item.DateTimeIn | date:'dd MMMM yyyy'</h2>
+                        <div class="row">
+                            <div class="col col-10 ">
+                                <i class="ion-android-arrow-dropright-circle" style="color: green; font-size: 20px;"></i></div>
+                            <div class="col col-25">
+                                <p>{{item.DateTimeIn | date:'hh:mm a':'GMT+14:00'}}</p>
+                            </div>
+                            <div class="col col-10"><i class="ion-android-arrow-dropleft-circle" style="color: red; font-size: 20px;"></i></div>
+                            <div class="col col-25">
+                                <p>{{item.DateTimeOut | date:'hh:mm a':'GMT+14:00'}}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div ng-show="var=='2'" class="scrollArea">
+                <div class="list">
+                    <a ng-click="showDetailLeave(item)" class="item item-icon-left" style="background-color: #EEEEEE;" ng-repeat=" item in getLeavesData | orderBy:'-LeaveStartDateTime'" ng-show="item.ApproveStatus =='A' && Leaved(item.LeaveStartDateTime)">
+                        <i class="icon ion-android-calendar" style="color: #ff9900;"></i>
+                        <h2 style="font-weight: bold;">{{item.LeaveType == 1 ? "Sick Leave" : item.LeaveType == 2 ? "Personal Leave " : item.LeaveType == 3 ? "Annual Leave" : false}}  |  {{item.LeaveStartDateTime | date : 'dd MMMM yyyy'}}</h2>
+                        <p>item.LeaveDetial</p>
+                    </a>
+                </div>
+            </div>
+        </ion-tab>
+        <ion-tab title="Settings" icon-on="icon ion-document" icon-off="icon ion-document" >
+            <!-- Tab 3 content -->
+            <div class="row">
+                <div class="col">
+                    <a href="#/views/home"><i class="ion-ios-home" style="color: #FF9900; font-size: 40px;"></i></a>
+                </div>
+                <div class="col text-center">
+                    <h4 style="color: #FF9900;">Request</h4>
+                </div>
+                <div class="col text-right">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col col-10">
+                </div>
+                <div class="col col-80 text-center">
+                    <div class="button-bar">
+                        <a class="button" ng-class="var==1?'button-balanced':'button-stable'" ng-click="click(1)">Leave</a>
+                        <a class="button" ng-class="var==2?'button-balanced':'button-stable'" ng-click="click(2)">Adjust</a>
+                    </div>
+                </div>
+                <div class="col col-10">
+                </div>
+            </div>
+            <div ng-show="var=='1'" class="scrollAreas">
+                <div class="list">
+                    <a ng-click="showDetailLeave(item)"  class="item item-icon-left" style="background-color: #EEEEEE;" ng-repeat="item in getLeavesData | orderBy:'LeaveStartDateTime'" ng-hide="item.ApproveStatus =='S' || chkDateInDay(item.LeaveStartDateTime)" >
+                        <i class="icon ion-android-calendar" style="color: #ff9900;" ></i>
+                        <h2 style="font-weight: bold;">item.LeaveType == 1 ? "Sick Leave" : item.LeaveType == 2 ? "Personal Leave " : item.LeaveType == 3 ? "Annual Leave" : false}}  |  {{item.LeaveStartDateTime | date : 'dd MMMM yyyy'}}</h2>
+                        <p>{{item.LeaveDetial}}</p>
+                        <span class="badgeleave {{item.ApproveStatus =='A' ? 'badge-adjust' : item.ApproveStatus =='W' ? 'badge-wait' : 'badge-reject'}}"><p id="fontStatus">{{item.ApproveStatus}}</p></span>
+                    </a>
+                </div>
+            </div>
+            <div ng-show="var=='2'" class="scrollAreas">
+                <div class="list" >
+                    <a href="#" class="item item-icon-left" style="background-color: #EEEEEE;" ng-repeat="item in adjust">
+                        <i class="icon ion-android-calendar" style="color: #ff9900;"></i>
+                        <h2 style="font-weight: bold;">item.adjustDate</h2>
+                        <p>item.adjustDetail</p>
+                        <span class="badgeleave {{item.adjustStatus =='A' ? 'badge-adjust' : item.adjustStatus =='W' ? 'badge-wait' : 'badge-reject'}}"><p id="fontStatus">{{item.adjustStatus}}</p></span>
+                    </a>
+                </div>
+            </div>
+        </ion-tab>
+    </ion-tabs>
+</ion-view>

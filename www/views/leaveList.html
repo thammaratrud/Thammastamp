@@ -1,0 +1,18 @@
+<ion-content>
+    <div class="row row-bottom ">
+        <div class="col col-33" style="text-align:left;"><a href="#/views/leave"><i class="ion-ios-arrow-back" style="font-size: 40px; color: #ff9900;" ></i></a></div>
+        <div class="col col-33" style="text-align:center;">
+            <p style="font-size: 150%; color: #ff9900;">Leave List</p>
+        </div>
+    </div>
+    </br>
+    <div class="list" class="scrollAreas">
+        <!-- ng-click="showActionSheet(getLeavesData)" -->
+        <a href="#/views/leaveDraft/{{getLeavesData}}" class="item item-icon-left" style="background-color: #EEEEEE;" ng-repeat="getLeavesData in getLeavesData | orderBy:'LeaveStartDateTime'" ng-show="getLeavesData.ApproveStatus =='S'" >
+            <i class="icon ion-android-calendar" style="color: #ff9900;"></i>
+            <h2 style="font-weight: bold;">{{getLeavesData.LeaveType == 1 ? "Sick Leave" : getLeavesData.LeaveType == 2 ? "Personal Leave " : getLeavesData.LeaveType == 3 ? "Annual Leave" : false}}  |  {{getLeavesData.LeaveStartDateTime | date:'dd MMMM yyyy'}}</h2>
+            <p>{{getLeavesData.LeaveDetial =="" ? "-" : getLeavesData.LeaveDetial}}</p>
+        </a>
+    </div>
+
+</ion-content>

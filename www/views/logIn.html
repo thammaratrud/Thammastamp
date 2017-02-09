@@ -1,0 +1,40 @@
+<ion-content>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="text-center">
+        <img src="img/Logo.png" style="with:200px;height:200px">
+        <br>
+        <br>
+        <div class="list list-inset">
+            <label class="item item-input  login-focus">
+                <input type="email" placeholder="E-mail" ng-model="loginData.username">
+            </label>
+            <label class="item item-input  login-focus">
+                <input type="password" placeholder="Password" ng-model="loginData.password">
+            </label>
+        </div>
+        <br>
+        <button class="button login" ng-click="login()">LogIn</button>
+         <!--<a href="#/views/home">
+         <p class="fontz-color">login</p>
+         </a>-->
+    </div>
+    <br>
+    <div class="text-center" ng-hide="message == ''">
+        {{message}}
+    </div>
+    <br>
+    <br>
+    <div class="row row-bottom">
+        <div class="col col-25"></div>
+        <div class="col col-25"></div>
+        <div class="col col-35"></div>
+        <div class="col col-15">
+            <a href="#/views/register">
+                <p class="fontz-color">Register</p>
+            </a>
+        </div>
+    </div>
+</ion-content>

@@ -1,0 +1,82 @@
+<ion-content >
+    <div ng-repeat="item in user.Employeeprofile">
+    <div class="row">
+        <div class="col">
+            <a href="#/views/home"><i class="ion-ios-home" style="color: #FF9900; font-size: 40px;"></i></a>
+        </div>
+        <div class="col text-center">
+            <h4 style="color: #FF9900;">Profile</h4>
+        </div>
+        <div class="col text-right">
+            <a nav-direction="swap" href="#/views/captureShareCard"><i class="ion-android-share-alt" style="color: #FF9900; font-size: 40px;"></i></a>
+        </div>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col col-20">
+                <div id="employeeDetail">
+                    <img src="" style="with:100px;height:100px" class="imgRadius">
+                </div>
+            </div>
+            <div class="col col-80 text-center">
+                <h2 style="color: #FF9900;">{{item.FirstName}} {{item.LastName}}</h2>
+                <h4>{{item.JobTitle}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="item item-text-wrap ebuCard" style="text-align: justify;">
+                        <!-- <p ng-bind-html="employeeData.OfficeAddress"></p> -->
+                        <p>Cyber Advance System And Network Co.,Ltd</p>
+                        <p>{{item.officeAddress}}</p>
+                       
+                        <!-- <p>Cyber Advance System And Network Co.,Ltd</p>
+                    <p>ไซเบอร์ แอดวานซ์ ซิสเต็ม แอนด์ เน็ตเวิร์ก จำกัด</p>
+                    <p>169/50 อาคาร เอ็มที ออฟฟิต ปาร์ค ม.3 ถ.ลำลูกกา</p>
+                    <p>ต.ลำลูกกา อ.ลำลูกกา จ.ปทุมธานี 12130</p> -->
+                        <!--                                         <p>Cyber Advance System And Network Co.,Ltd
+                    ไซเบอร์ แอดวานซ์ ซิสเต็ม แอนด์ เน็ตเวิร์ก จำกัด
+                    169/50 อาคาร เอ็มที ออฟฟิต ปาร์ค ม.3 ถ.ลำลูกกา
+                    ต.ลำลูกกา อ.ลำลูกกา จ.ปทุมธานี 12130</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col col-20 text-right">
+                <img src="img/iconTel50.png" alt="">
+            </div>
+            <div class="col col-80 ">
+                <h4><b>{{item.Tel}}</b></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-20 text-right">
+                <img src="img/iconFacebook50.png" alt="">
+            </div>
+            <div class="col col-80 ">
+                <h4><b>{{item.Facebook}}</b></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-20 text-right">
+                <img src="img/iconLine50.png" alt="">
+            </div>
+            <div class="col col-80 ">
+                <h4><b>{{item.Line}}</b></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-20 text-right">
+                <img src="img/iconMail50.png" alt="">
+            </div>
+            <div class="col col-80 ">
+                <h4><b>{{item.email}}</b></h4>
+            </div>
+        </div>
+    </div>
+    </div>
+</ion-content>

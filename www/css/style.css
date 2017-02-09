@@ -1,0 +1,420 @@
+/* Empty. Add your own CSS if you like */
+
+.ion-arrow-swap {
+    color: white;
+}
+
+.ion-calendar {
+    color: white;
+}
+
+.ion-document {
+    color: white;
+}
+
+.bar {
+    /* border-color: #b2b2b2; */
+    /* background-color: #f8f8f8; */
+    /* background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%); */
+    color: #444;
+}
+
+.login {
+    width: 30%;
+    color: white;
+    background-color: #FF9900;
+}
+
+.login-focus {
+    border: 1px solid #FF9900;
+}
+
+.fontz-color {
+    color: #FF9900;
+}
+
+.bar.bar-balanced {
+    background-color: white;
+    color: #FF9900;
+    margin-left: 80%;
+    background-color: #EEEEEE;
+}
+
+.pane,
+.view {
+    background-color: #EEEEEE;
+}
+
+.list {
+    background-color: #EEEEEE;
+}
+
+.positive {
+    background-color: #FF9900;
+    color: white;
+}
+
+.iconsMore {
+    font-size: 70px;
+    color: #FF99CC;
+}
+
+.iconsLeave {
+    font-size: 70px;
+    color: #00CCFF;
+}
+
+.iconsAdj {
+    font-size: 70px;
+    color: #FFFF00;
+}
+
+.iconsExit {
+    font-size: 40px;
+    color: #EE0000;
+}
+
+.bar .title {
+    display: none;
+}
+
+.tabs-assertive > .tabs,
+.tabs.tabs-assertive {
+    border-color: #FF9900;
+    background-color: #FF9900;
+    background-image: linear-gradient(0deg, #FF9900, #FF9900 50%, transparent 50%);
+    color: #FF9900;
+}
+
+.ebuCard {
+    background-color: #DDDDDD;
+}
+
+input[type="radio"] {
+    width: 2em;
+    height: 2em;
+}
+
+input[type="radio"]:checked+label {
+    font-weight: bold;
+    color: #110000;
+}
+input[type="radio"]+label {
+    color: #AAAAAA;
+}
+
+.radio-label {
+    margin-top: 5px;
+    margin-left: 0px;
+    position: absolute;
+}
+
+
+/*.radio-label : checked{
+    background-color:#bbb;
+    
+}*/
+
+.imgRadius {
+    -webkit-user-drag: none;
+    border-radius: 50%;
+}
+
+.imgNoRadius {
+    -webkit-user-drag: none;
+    border-radius: 0%;
+    margin-top: 8px;
+}
+
+.chart {
+    width: 220px;
+    height: 105px;
+}
+
+.item .badgeleave {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+}
+
+.badgeleave {
+    background-color: transparent;
+    color: #AAAAAA;
+    z-index: 1;
+    display: inline-block;
+    padding: 3px 6px;
+    min-width: 25px;
+    border-radius: 10px;
+    vertical-align: baseline;
+    white-space: nowrap;
+    line-height: 16px;
+}
+
+.badgeleave.badge-adjust {
+    background-color: #00CC00;
+    color: #fff;
+}
+
+.badgeleave.badge-wait {
+    background-color: #33CCFF;
+    color: #fff;
+}
+
+.badgeleave.badge-reject {
+    background-color: #ef473a;
+    color: #fff;
+}
+
+.badgeleave.badge-font {
+    text-align: center;
+    font-weight: bold;
+    font-color: red;
+}
+
+#fontStatus {
+    color: white;
+    font-size: 12px;
+    margin: auto;
+    font-weight: bold;
+}
+
+.iconsMenu {
+    font-size: 40px;
+    color: #FF9900;
+}
+
+.intro {
+    margin-top: 220px;
+}
+
+.menuList {
+    background-color: #DDDDDD;
+    margin-bottom: 1px;
+    margin-top: 1px;
+}
+
+.menuBackground {
+    background-color: #DDDDDD;
+}
+
+.headerMenu {
+    position: fixed;
+    margin-top: 6px;
+}
+
+.menus {
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.itemList {
+    border-width: 1px;
+    border-style: solid;
+}
+
+.scrollArea {
+    height: 291px;
+    width: 100%;
+    overflow: auto;
+}
+
+.scrollAreas {
+    height: 400px;
+    width: 100%;
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.map {
+    text-align: -webkit-center;
+}
+
+.infoWindowContent {
+    font-size: 14px !important;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+.labels {
+    -webkit-user-drag: none;
+    border-radius: 50%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 40px;
+    /*background-image: url("../img/simson.png");*/
+}
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+input[type="date"]::-webkit-clear-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+.typeDate {
+    margin-left: -10px;
+}
+
+::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    opacity: 1
+}
+
+.spinner svg {
+    width: 100% !important;
+    height: 85px !important;
+}
+
+.popup {
+    width: 90% !important;
+    height: auto;
+}
+
+.alertDetail {
+    color: #FFC901;
+    font-size: 150%;
+}
+.iconDelete {
+    padding-left: 280px;
+}
+.platform-android .action-sheet-backdrop {
+    -webkit-transition: background-color 150ms ease-in-out;
+    transition: background-color 150ms ease-in-out;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 11;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.platform-android .action-sheet-backdrop.active {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.platform-android .action-sheet-wrapper {
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+    -webkit-transition: all cubic-bezier(0.36, 0.66, 0.04, 1) 500ms;
+    transition: all cubic-bezier(0.36, 0.66, 0.04, 1) 500ms;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+}
+
+.platform-android .action-sheet-up {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.platform-android .action-sheet {
+    margin-left: 8px;
+    margin-right: 8px;
+    width: auto;
+    z-index: 11;
+    overflow: hidden;
+}
+
+.platform-android .action-sheet .button {
+    display: block;
+    padding: 1px;
+    width: 100%;
+    border-radius: 0;
+    border-color: #d1d3d6;
+    background-color: transparent;
+    color: #007aff;
+    font-size: 21px;
+}
+
+.platform-android .action-sheet .button:hover {
+    color: #007aff;
+}
+
+.platform-android .action-sheet .button.destructive {
+    color: #ff3b30;
+}
+
+.platform-android .action-sheet .button.destructive:hover {
+    color: #ff3b30;
+}
+
+.platform-android .action-sheet .button.active, .platform-android .action-sheet .button.activated {
+    box-shadow: none;
+    border-color: #d1d3d6;
+    color: #007aff;
+    background: #e4e5e7;
+}
+
+.platform-android .action-sheet-has-icons .icon {
+    position: absolute;
+    left: 16px;
+}
+
+.platform-android .action-sheet-title {
+    padding: 16px;
+    color: #8f8f8f;
+    text-align: center;
+    font-size: 13px;
+}
+
+.platform-android .action-sheet-group {
+    margin-bottom: 8px;
+    border-radius: 4px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.platform-android .action-sheet-group .button {
+    border-width: 1px 0px 0px 0px;
+}
+
+.platform-android .action-sheet-group .button:first-child:last-child {
+    border-width: 0;
+}
+
+.platform-android .action-sheet-options {
+    background: #f1f2f3;
+}
+
+.platform-android .action-sheet-cancel .button {
+    font-weight: 500;
+}
+
+.platform-android .action-sheet-open {
+    pointer-events: none;
+}
+
+.platform-android .action-sheet-open.modal-open .modal {
+    pointer-events: none;
+}
+
+.platform-android .action-sheet-open .action-sheet-backdrop {
+    pointer-events: auto;
+}
+
+.platform-android .action-sheet .action-sheet-title, .platform-android .action-sheet .button {
+    text-align: center;
+}
+
+.platform-android .action-sheet-cancel {
+    display: block;
+}

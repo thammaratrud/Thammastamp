@@ -1,0 +1,99 @@
+<ion-content>
+    <div class="row row-bottom " style="text-align:left;">
+        <div class="col col-33"><a href="#/views/home"><i class="ion-ios-home" style="font-size: 40px; color: #ff9900; " ></i></a></div>
+        <div class="col col-33" style="text-align:center;">
+            <p style="font-size: 150%; color: #ff9900;">Leave</p>
+        </div>
+        <div class="col col-33" style="text-align:right;"><a href="#/views/leaveList"><i class="ion-navicon-round" style="font-size: 40px; color: #ff9900;"></i></a></div>
+    </div>
+    </br>
+    <div class="row" ng-init="LeaveType='1'">
+        <div class="col col-33">
+            <input type="radio" ng-model="LeaveType" value="1" checked >
+            <label class="radio-label">Sick Leave</label>
+        </div>
+        <div class="col col-33">
+            <input type="radio" ng-model="LeaveType" value="2">
+            <label class="radio-label">Personal Leave</label>
+        </div>
+        <div class="col col-33">
+            <input type="radio" ng-model="LeaveType" value="3">
+            <label class="radio-label">Annual Leave</label>
+        </div>
+    </div>
+    <hr>
+    <div class="row row-bottom ">
+        <div class="col text-left">
+            <p style="font-size: 120%; font-weight: bold; ">Remark</p>
+            <textarea name="textarea" style="width:100%;height:100px;" ng-model="remark"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-50">
+            <div class="item item-input-inset" style="background-color: #EEEEEE; border-style: none;">
+                <label class="item-input-wrapper typeDate">
+                    <input type="date" style="background-color: #fff; width:136px" ng-model="startDate" ng-change="dateLeave(startDate,endDate)" ng-disabled="data.active"><i class="ion-ios-calendar-outline" style="font-size: 30px; color: #ff9900;"></i>
+                </label>
+            </div>
+        </div>
+        <div class="col col-50">
+            <div class="item item-input-inset" style="background-color: #EEEEEE; border-style: none;">
+                <label class="item-input-wrapper typeDate">
+                    <input type="date" style="background-color: #fff; width:136px" ng-model="endDate" ng-change="dateLeave(startDate,endDate)" ng-disabled="data.active"><i class="ion-ios-calendar-outline" style="font-size: 30px; color: #ff9900;"></i>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div ng-hide="endDate>startDate || endDate<startDate">
+        <hr>
+        <li class="item item-toggle" style="font-weight: bold; background-color: #EEEEEE; border-style: none;">
+            Half-Day
+            <label class="toggle toggle-balanced">
+                <input type="checkbox" ng-click="toggle()">
+                <div class="track">
+                    <div class="handle"></div>
+                </div>
+            </label>
+        </li>
+    </div>
+    <hr>
+    <div class="row" ng-hide="data.active">
+        <div class="col col-20 text-left">
+            <p style="font-size: 120%; font-weight: bold;">จำนวน</p>
+        </div>
+        <div class="col col-60 text-center" style="margin-top: -10px; margin-top: -6px;">
+            <input type="text" ng-model="diffDays" style="background-color: #EEEEEE; text-align:center; width: inherit;" ng-disabled="datas(startDate, endDate)" readonly>
+        </div>
+        <div class="col col-20 text-right">
+            <p style="font-size: 120%; font-weight: bold;">วัน</p>
+        </div>
+    </div>
+<!--     <div class="row" ng-show="data.active && diffDays!=0" style="margin-top: 12px;">
+        <div class="col text-left">
+            <p style="font-size: 120%; font-weight: bold;">จำนวน</p>
+        </div>
+        <div class="col text-center" style="margin-top: -6px;">
+            <input type="number" placeholder="1 - 7 hour" style="background-color: #fff; text-align:center;     width: inherit;" min="1" max="7" ng-model="diffHour" maxlength="1" ng-disabled="!data.active ? diffHour=0 : false">
+        </div>
+        <div class="col text-right">
+            <p style="font-size: 120%; font-weight: bold;">ชั่วโมง</p>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col text-left">
+            <button class="button button-block button-balanced" ng-click="saveLeave(LeaveType,remark,startDate,endDate,diffDays)">
+                Save
+            </button>
+        </div>
+        <div class="col text-center">
+            <button class="button button-block button-calm" ng-disabled="endDate < startDate ? true : !remark ? true : false" ng-click="sendLeave(LeaveType,remark,startDate,endDate,diffDays)">
+                Send
+            </button>
+        </div>
+        <div class="col text-right">
+            <button class="button button-block button-dark" ng-click="remark = '' ">
+                Cancel
+            </button>
+        </div>
+    </div>
+</ion-content>
