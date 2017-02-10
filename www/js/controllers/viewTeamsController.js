@@ -1,5 +1,5 @@
-myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewTeamsService', function($scope, $cordovaGeolocation, viewTeamsService) {
-
+myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewTeamsService', function ($scope, $cordovaGeolocation, viewTeamsService) {
+    
     var imgPathPrefix = "img/";
     var mapOptions = {
         zoom: 15,
@@ -11,13 +11,13 @@ myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewT
     $scope.markers = [];
     var viewTeams = [];
     var infoWindow = new google.maps.InfoWindow();
-    viewTeamsService.getviewTeam().then(function(results) {
+    viewTeamsService.getviewTeam().then(function (results) {
         //alert("Success");
         viewTeams = results.data;
         for (i = 0; i < viewTeams.length; i++) {
             createMarker(viewTeams[i]);
         }
-    }, function(error) {
+    }, function (error) {
         alert(error.data.message);
     });
 
@@ -60,9 +60,9 @@ myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewT
 
 
 
-    
 
-    var createMarker = function(info) {
+
+    var createMarker = function (info) {
 
 
         // var icon = info.img;
@@ -94,7 +94,7 @@ myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewT
         });
 
 
-        google.maps.event.addListener(marker, 'mousedown', function() {
+        google.maps.event.addListener(marker, 'mousedown', function () {
             infoWindow.setContent(marker.title);
             infoWindow.open($scope.map, marker);
         });

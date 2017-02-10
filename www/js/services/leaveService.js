@@ -11,16 +11,16 @@ myApp.factory('leaveService', ['$http', 'ngAuthSettings', 'localStorageService',
         // }
 
         leaveData.Email = deviceData.Email;
-        return $http.get(serviceBase + 'api/Leave').then(function(results) {
+        return $http.get(serviceBase + '/api/leaves').then(function(results) {
 
             if (!leaveData.ID) {
 
-                return $http.post(serviceBase + 'api/Leave', leaveData).then(function(results) {
+                return $http.post(serviceBase + '/api/leaves', leaveData).then(function(results) {
                     return results;
                 });
             } else {
 
-                return $http.put(serviceBase + 'api/Leave/'+ leaveData.ID, leaveData).then(function(results) {
+                return $http.put(serviceBase + '/api/leaves'+ leaveData._ID, leaveData).then(function(results) {
                     return results;
                 });
             }
@@ -66,8 +66,8 @@ myApp.factory('leaveService', ['$http', 'ngAuthSettings', 'localStorageService',
         // var authData = localStorageService.get('authorizationData');
         // if (authData) {           
         // }
-        var Email = deviceData.Email;
-        return $http.get(serviceBase + 'api/Leave').then(function(results) {
+        var Email1 = deviceData.Email;
+        return $http.get(serviceBase + '/api/leaves').then(function(results) {
             return results;
         });
 

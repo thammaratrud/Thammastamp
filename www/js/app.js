@@ -58,20 +58,20 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider)
         .state('leave', {
             cache: false,
             url: '/views/leave',
-            templateUrl: 'views/leave.html'
-            // controller: 'leaveController'
+            templateUrl: 'views/leave.html',
+            controller: 'leaveController'
         })
         .state('leaveList', {
             cache: false,
             url: '/views/leaveList',
-            templateUrl: 'views/leaveList.html'
-            // controller: 'leaveController'
+            templateUrl: 'views/leaveList.html',
+            controller: 'leaveController'
         })
         .state('leaveDraft', {
             cache: false,
             url: '/views/leaveDraft/:getLeavesData',
-            templateUrl: 'views/leaveDraft.html'
-            // controller: 'leaveController'
+            templateUrl: 'views/leaveDraft.html',
+            controller: 'leaveController'
 
         })
         .state('register', {
@@ -96,13 +96,13 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider)
         })
         .state('viewTeams', {
             url: '/views/viewTeams',
-            templateUrl: 'views/viewTeams.html'
-            // controller: 'viewTeamsController'
+            templateUrl: 'views/viewTeams.html',
+            controller: 'viewTeamsController'
         })
         .state('leaveView', {
             url: '/views/leaveView/:getLeavesData',
-            templateUrl: 'views/leaveView.html'
-            // controller: 'leaveController'
+            templateUrl: 'views/leaveView.html',
+            controller: 'leaveController'
         })
 
 
@@ -116,7 +116,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider)
 
 });
 
-var serviceBase = 'http://localhost:3000';
+var serviceBase = 'https://thammastamp.herokuapp.com';
 myApp.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'

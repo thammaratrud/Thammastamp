@@ -105,13 +105,13 @@ myApp.controller('leaveController', ['$scope', 'leaveService', '$cordovaCalendar
 
                 ID: ID,
                 Email: "",
-                LeaveType: parseInt(LeaveType),
-                LeaveDetial: remark,
-                LeaveStartDateTime: startDate,
-                LeaveEndDateTime: endDate,
-                LeaveHalf: halfDay,
-                LeaveTime: diffDays,
-                ApproveStatus: "W",
+                leaveType: parseInt(leaveType),
+                leaveDetail: remark,
+                leaveStartDateTime: startDate,
+                leaveEndDateTime: endDate,
+                leaveHalf: halfDay,
+                leaveTime: diffDays,
+                approveStaus: "W",
             };
 
             leaveService.createLeaves(leaveData).then(function(response) {
@@ -149,13 +149,13 @@ myApp.controller('leaveController', ['$scope', 'leaveService', '$cordovaCalendar
 
                 ID: ID,
                 Email: "",
-                LeaveType: parseInt(LeaveType),
-                LeaveDetial: remark,
-                LeaveStartDateTime: startDate,
-                LeaveEndDateTime: endDate,
-                LeaveHalf: halfDay,
-                LeaveTime: diffDays,
-                ApproveStatus: "S",
+                leaveType: parseInt(leaveType),
+                leaveDetail: remark,
+                leaveStartDateTime: startDate,
+                leaveEndDateTime: endDate,
+                leaveHalf: halfDay,
+                leaveTime: diffDays,
+                approveStaus: "S",
             }
 
             leaveService.createLeaves(leaveData).then(function(response) {

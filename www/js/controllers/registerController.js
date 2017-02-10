@@ -1,5 +1,5 @@
 'use strict';
-myApp.controller('registerController', ['$scope', '$location', '$timeout', 'authService', 'deviceAuthService', '$ionicPopup', '$http', function ($scope, $location, $timeout, authService, deviceAuthService, $ionicPopup, $http) {
+myApp.controller('registerController', ['$scope', '$location', '$timeout', 'authService', '$ionicPopup', '$http', function ($scope, $location, $timeout, authService, $ionicPopup, $http) {
 
     $scope.savedSuccessfully = false;
     $scope.message = "";

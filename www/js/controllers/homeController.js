@@ -1,7 +1,7 @@
 myApp.controller('homeController', ['$scope', '$interval', '$filter', '$ionicSideMenuDelegate',
-    '$ionicPopup', '$ionicLoading', '$location', '$ionicHistory', 'localStorageService', '$timeout', '$state', '$cordovaGeolocation','$http',
+    '$ionicPopup', '$ionicLoading', '$location', '$ionicHistory', 'localStorageService', '$timeout', '$state', '$cordovaGeolocation', '$http',
 
-    function ($scope, $interval, $filter, $ionicSideMenuDelegate, $ionicPopup, $ionicLoading, $location, $ionicHistory, localStorageService, $timeout, $state, $cordovaGeolocation,$http) {
+    function ($scope, $interval, $filter, $ionicSideMenuDelegate, $ionicPopup, $ionicLoading, $location, $ionicHistory, localStorageService, $timeout, $state, $cordovaGeolocation, $http) {
         $scope.user = localStorageService.get('authorizationData');
         $scope.exitApp = function () {
 
@@ -36,22 +36,44 @@ myApp.controller('homeController', ['$scope', '$interval', '$filter', '$ionicSid
             var Data1 = {
                 email: $scope.user.email,
                 dateTimeIn: new Date(),
-                user:$scope.user
+                user: $scope.user
                 // dateTimeOut: Data1.dateTimeOut
             };
+
+            var Data2 = {
+                // email: $scope.user.email,
+                dateTimeOut: new Date(),
+                // user: $scope.user
+                // dateTimeOut: Data1.dateTimeOut
+            };
+            var d = new Date();
+            d.setHours(0, 0, 0, 0);
+            // alert(d);
             // $http.post(serviceBase + '/api/checkins', Data1).success(function (response) {
             //     alert(Data1);
             // }
-            $http.post(serviceBase + '/api/checkins', Data1).success(function (response) {
+            // on hold
+                $http.post(serviceBase + '/api/checkins', Data1).success(function (response) {
+                    $scope.checkedIn = response;
+                    if ($scope.checkedIn === d) {
+                        return $scope.checkedIn = null;
+                        console.log("Don't checkout");
+                    };
+                    alert('checkIn success');
+                }).error(function (err) {
+                    alert(err);
+                    alert('checkIn Failed');
+                })
 
-
-                alert('success');
-
-            }).error(function (err) {
-                alert(err);
-            })
-
-
+            if ($scope.checkedIn) {
+                $http.put(serviceBase + '/api/checkins/' + $scope.checkedIn._id, Data2).success(function (response) {
+                    alert('checkOut success');
+                }).error(function (err) {
+                    alert(err);
+                    alert('checkIn Failed');
+                })
+            }
+            // on hold
             // var posOptions = {
             //     timeout: 10000,
             //     enableHighAccuracy: true

@@ -1,4 +1,4 @@
-<ion-side-menus >
+<ion-side-menus>
     <ion-side-menu-content>
         <ion-content scroll="false">
             <div class="row row-bottom ">
@@ -13,50 +13,52 @@
             <div class="text-center">
                 <br>
                 <p style="font-size: 300%; color:#FF9900"><b><span my-current-time="format"></span></b></p>
-                <br>
-                <p style="font-size: 150%; color:#555555"><b><span my-current-time2="format2"></span></b></p>
-                <br>
-                <br>
-                <img src="img/PicFinger.png" style="with:300px;height:300px" class="imgNoRadius" on-hold="checkIn()">
-                <!--<button class="button button-block button-dark" ng-click="logout()">Logout</button>-->
-            </div>
-        </ion-content>
-    </ion-side-menu-content>
-    <!-- Left menu -->
-    <ion-side-menu side="left" class="menuBackground">
-        <ion-header-bar class="bar-stable menuBackground ">
-            <div class="menus">
-                <label style="font-size: 300%; position: fixed; margin-left: 70px;  color: #FF9900;"><b>Menu</b></label>
-            </div>
-        </ion-header-bar>
-        <ion-content scroll="false">
-            <div class="list">
-                <a class="item item-icon-left item-icon-right menuList" href="#/views/employeeDetail">
-                    <i class="icon ion-person"></i> My Profile
-                    <i class="icon ion-ios-arrow-forward"></i>
-                </a>
-                <a class="item item-icon-left item-icon-right menuList" href="#/views/capture">
-                    <i class="icon ion-card"></i> E-Business Card
-                    <i class="icon ion-ios-arrow-forward"></i>
-                </a>
-                <a class="item item-icon-left item-icon-right menuList" href="#/views/leave">
-                    <i class="icon ion-medkit"></i> Leave
-                    <i class="icon ion-ios-arrow-forward"></i>
-                </a>
-                <a class="item item-icon-left item-icon-right menuList" href="#">
-                    <i class="icon ion-android-alert"></i> Adjust
-                    <i class="icon ion-ios-arrow-forward"></i>
-                </a>
-                <a class="item item-icon-left item-icon-right menuList" href="#/views/viewTeams">
-                    <i class="icon ion-map"></i> View Teams
-                    <i class="icon ion-ios-arrow-forward"></i>
-                </a>
-                <a class="item item-icon-left item-icon-right menuList" ng-click="logout()">
-                    <i class="icon ion-chatbubble-working"></i> Signout
-                    <i class="icon ion-ios-arrow-forward"></i>
-                </a>
-            </div>
-            <!-- <ion-list>
+<br>
+<p style="font-size: 150%; color:#555555"><b><span my-current-time2="format2"></span></b></p>
+<br>
+<br>
+
+    <img src="img/PicFinger.png" style="with:300px;height:300px" class="imgNoRadius" on-hold="checkIn()">
+
+<!--<button class="button button-block button-dark" ng-click="logout()">Logout</button>-->
+</div>
+</ion-content>
+</ion-side-menu-content>
+<!-- Left menu -->
+<ion-side-menu side="left" class="menuBackground">
+    <ion-header-bar class="bar-stable menuBackground ">
+        <div class="menus">
+            <label style="font-size: 300%; position: fixed; margin-left: 70px;  color: #FF9900;"><b>Menu</b></label>
+</div>
+</ion-header-bar>
+<ion-content scroll="false">
+    <div class="list">
+        <a class="item item-icon-left item-icon-right menuList" href="#/views/employeeDetail">
+            <i class="icon ion-person"></i> My Profile
+            <i class="icon ion-ios-arrow-forward"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right menuList" href="#/views/capture">
+            <i class="icon ion-card"></i> E-Business Card
+            <i class="icon ion-ios-arrow-forward"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right menuList" href="#/views/leave">
+            <i class="icon ion-medkit"></i> Leave
+            <i class="icon ion-ios-arrow-forward"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right menuList" href="#">
+            <i class="icon ion-android-alert"></i> Adjust
+            <i class="icon ion-ios-arrow-forward"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right menuList" href="#/views/viewTeams">
+            <i class="icon ion-map"></i> View Teams
+            <i class="icon ion-ios-arrow-forward"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right menuList" ng-click="logout()">
+            <i class="icon ion-chatbubble-working"></i> Signout
+            <i class="icon ion-ios-arrow-forward"></i>
+        </a>
+    </div>
+    <!-- <ion-list>
                 <ion-item menu-close href="#/views/leave" class="menuList">
                     Leave&nbsp;&nbsp;&nbsp;<i class="ion-ios-medical-outline"></i>
                 </ion-item>
@@ -67,6 +69,6 @@
                     More&nbsp;&nbsp;&nbsp;<i class="ion-more"></i>
                 </ion-item>
             </ion-list> -->
-        </ion-content>
-    </ion-side-menu>
+</ion-content>
+</ion-side-menu>
 </ion-side-menus>

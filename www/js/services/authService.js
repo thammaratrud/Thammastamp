@@ -68,6 +68,7 @@ myApp.factory('authService', ['$http', '$q', 'ngAuthSettings', 'localStorageServ
         }).error(function (err, status) {
             _logOut();
             deferred.reject(err);
+            alert('login Failed')
         });
 
         return deferred.promise;

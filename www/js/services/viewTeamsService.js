@@ -1,5 +1,5 @@
 'use strict';
-myApp.factory('viewTeamsService', ['$http', 'ngAuthSettings', function($http, ngAuthSettings, localStorageService) {
+myApp.factory('viewTeamsService', ['$http', 'ngAuthSettings', 'localStorageService', function($http, ngAuthSettings, localStorageService) {
 
     var serviceBase = ngAuthSettings.apiServiceBaseUri;
 
@@ -11,7 +11,7 @@ myApp.factory('viewTeamsService', ['$http', 'ngAuthSettings', function($http, ng
            
         // }
         // + authData.userName
-        return $http.get(serviceBase + 'api/CheckIn').then(function(results) {
+        return $http.get(serviceBase + '/api/checkins').then(function(results) {
                 return results;
             });
     };
