@@ -4,6 +4,7 @@ myApp.controller('homeController', ['$scope', '$interval', '$filter', '$ionicSid
     function ($scope, $interval, $filter, $ionicSideMenuDelegate, $ionicPopup, $ionicLoading, $location, $ionicHistory, localStorageService, $timeout, $state, $cordovaGeolocation, $http) {
         $scope.user = localStorageService.get('authorizationData');
         $scope.exitApp = function () {
+            // console.log(authorizationData);
 
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Confirm exit application',
@@ -32,13 +33,10 @@ myApp.controller('homeController', ['$scope', '$interval', '$filter', '$ionicSid
                 }
             });
         }
+        // console.log( $scope.user);
         $scope.checkIn = function () {
-            var Data1 = {
-                email: $scope.user.email,
-                dateTimeIn: new Date(),
-                user: $scope.user
-                // dateTimeOut: Data1.dateTimeOut
-            };
+            alert('in function checkin');
+            // $scope.res = null;
 
             var Data2 = {
                 // email: $scope.user.email,
@@ -46,108 +44,96 @@ myApp.controller('homeController', ['$scope', '$interval', '$filter', '$ionicSid
                 // user: $scope.user
                 // dateTimeOut: Data1.dateTimeOut
             };
-            var d = new Date();
-            d.setHours(0, 0, 0, 0);
+            // var d = new Date();
+            // d.setHours(0, 0, 0, 0);
             // alert(d);
             // $http.post(serviceBase + '/api/checkins', Data1).success(function (response) {
             //     alert(Data1);
             // }
             // on hold
-            if(localStorageService)
-                $http.post(serviceBase + '/api/checkins', Data1).success(function (response) {
-                    $scope.checkedIn = response;
-                    // if ($scope.checkedIn === d) {
-                    //     return $scope.checkedIn = null;
-                    //     console.log("Don't checkout");
-                    // };
-                    alert('checkIn success');
-                }).error(function (err) {
-                    alert(err);
-                    alert('checkIn Failed');
-                })
-            if ($scope.checkedIn) {
-                $http.put(serviceBase + '/api/checkins/' + $scope.checkedIn._id, Data2).success(function (response) {
-                    alert('checkOut success');
-                }).error(function (err) {
-                    alert(err);
-                    alert('checkIn Failed');
-                })
-            }
-            // on hold
-            var posOptions = {
-                timeout: 10000,
-                enableHighAccuracy: true
-            };
-            var lat = "";
-            var lng = "";
-            $ionicLoading.show({
-                noBackdrop: false,
-                template: '<p><ion-spinner icon="ripple" class="spinner-assertive"></ion-spinner></p>',
-            });
+            $http.get(serviceBase + '/api/checkins/userid/' + $scope.user._id).success(function (response) {
+                // alert("1");
+                alert('res : ' + JSON.stringify(response));
+                // alert("2");
+
+                if (response.status === '' || response.status === 'Not checkin') {
+                    var posOptions = {
+                        timeout: 10000,
+                        enableHighAccuracy: true
+                    };
+                    var lat = "";
+                    var lng = "";
+                    $ionicLoading.show({
+                        noBackdrop: false,
+                        template: '<p><ion-spinner icon="ripple" class="spinner-assertive"></ion-spinner></p>',
+                    });
 
 
-            $cordovaGeolocation
-                .getCurrentPosition(posOptions)
-                .then(function (position) {
+                    $cordovaGeolocation
+                        .getCurrentPosition(posOptions)
+                        .then(function (position) {
 
-                    lat = position.coords.latitude;
-                    lng = position.coords.longitude;
+                            lat = position.coords.latitude;
+                            lng = position.coords.longitude;
+                            // alert(lat + ' ' + lng);
 
-                    //alert("Got position: " + lat + ", " + lng);
-                    // alert(position.coords.latitude);
-                    // alert(position.coords.longitude);
+                            var Data1 = {
+                                email: $scope.user.email,
+                                dateTimeIn: new Date(),
+                                user: $scope.user,
+                                Lat: lat,
+                                Long: lng
+                                // dateTimeOut: Data1.dateTimeOut
+                            };
+                            // alert(Data1);
 
-                    authService.login().then(function (response) {
-                        var chkInData = {
-                            email: "",
-                            locationIn: lat + "," + lng,
-                            Lat : lat,
-                            Long: lng
-                        };
-                        checkInService.checkIn(chkInData).then(function (response) {
-                            //$cordovaDialogs.beep(1);
-                            $location.path("/views/employeeDetail");
-                            $ionicLoading.hide();
-                        }, function (response) {
-                            var errors = [];
-                            if (response.data.ModelState) {
-                                for (var key in response.data.ModelState) {
-                                    for (var i = 0; i < response.data.ModelState[key].length; i++) {
-                                        errors.push(response.data.ModelState[key][i]);
-                                    }
-                                }
+                            $http.post(serviceBase + '/api/checkins', Data1).success(function (response) {
+                                // $scope.res = response;
+                                localStorageService.set('checked', response);
+                                $ionicLoading.hide();
+                            }).error(function (err) {
+                                alert(err);
+                                alert('checkIn Failed');
+                            })
+
+                            // alert('end /api/checkins/userid/' + $scope.user._id);
+
+                        }, function (err) {
+                            alert(JSON.stringify(err));
+                            if (error.code == PositionError.PERMISSION_DENIED) {
+                                alert("Permission denied. check setting");
+                            } else if (error.code == PositionError.POSITION_UNAVAILABLE) {
+                                alert("Cannot get position. May be problem with network or can't get a satellite fix.");
+                            } else if (error.code == PositionError.TIMEOUT) {
+                                alert("Geolocation is timed out.");
                             } else {
-                                errors.push(response.data.Message);
+                                alert(error.message);
                             }
-                            $scope.message = "Failed to register user due to:" + errors.join(' ');
                         });
 
-                    },
-                        function (response) {
-                            var errors = [];
-                            if (response.data.ModelState) {
-                                for (var key in response.data.ModelState) {
-                                    for (var i = 0; i < response.data.ModelState[key].length; i++) {
-                                        errors.push(response.data.ModelState[key][i]);
-                                    }
-                                }
-                            } else {
-                                errors.push(response.data.Message);
-                            }
-                            $scope.message = "Failed to register user due to:" + errors.join(' ');
-                        }); 
-                }, function (err) { 
-                    alert(JSON.stringify(err));
-                    if (error.code == PositionError.PERMISSION_DENIED) {
-                        alert("Permission denied. check setting");
-                    } else if (error.code == PositionError.POSITION_UNAVAILABLE) {
-                        alert("Cannot get position. May be problem with network or can't get a satellite fix.");
-                    } else if (error.code == PositionError.TIMEOUT) {
-                        alert("Geolocation is timed out.");
-                    } else {
-                        alert(error.message);
-                    }
-                });
+                } else if (response.status === 'checkin only') {
+                    // $scope.res
+                    var res = localStorageService.get('checked');
+
+                    res.dateTimeOut = new Date();
+                    alert('checkin only : ' + JSON.stringify(res));
+                    alert('_id : ' + JSON.stringify(res._id));
+                    alert('dateTimeOut : ' + JSON.stringify(res.dateTimeOut));
+
+
+                    $http.put(serviceBase + '/api/checkins/' + res._id, res).success(function (response) {
+                    })
+
+                } else if (response.status === 'checkined today') {
+                    alert('today checked completed');
+                }
+            }).error(function (err) {
+                alert(JSON.stringify(err));
+
+
+            });
+            // on hold
+
 
 
 

@@ -117,6 +117,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider)
 });
 
 var serviceBase = 'https://thammastamp.herokuapp.com';
+// var serviceBase = 'localhost:3000';
+
 myApp.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'

@@ -5,7 +5,7 @@ myApp.controller('employeeController', ['$scope', 'employeeService', '$location'
         $ionicLoading, $templateCache, $ionicPopup, $filter, localStorageService) {
             
         $scope.user = localStorageService.get('authorizationData');
-        console.log($scope.user);
+        // console.log($scope.user);
 
        
                 // $scope.startDates = new Date(), 'dd/MM/yyyy';
