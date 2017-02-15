@@ -3,6 +3,7 @@ myApp.controller('employeeController', ['$scope', 'employeeService', '$location'
     '$ionicLoading', '$templateCache', '$ionicPopup', '$filter', 'localStorageService',
     function ($scope, employeeService, $location, $timeout,
         $ionicLoading, $templateCache, $ionicPopup, $filter, localStorageService) {
+            
         $scope.user = localStorageService.get('authorizationData');
         console.log($scope.user);
 

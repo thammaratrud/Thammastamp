@@ -53,18 +53,18 @@ myApp.controller('homeController', ['$scope', '$interval', '$filter', '$ionicSid
             //     alert(Data1);
             // }
             // on hold
+            if(localStorageService)
                 $http.post(serviceBase + '/api/checkins', Data1).success(function (response) {
                     $scope.checkedIn = response;
-                    if ($scope.checkedIn === d) {
-                        return $scope.checkedIn = null;
-                        console.log("Don't checkout");
-                    };
+                    // if ($scope.checkedIn === d) {
+                    //     return $scope.checkedIn = null;
+                    //     console.log("Don't checkout");
+                    // };
                     alert('checkIn success');
                 }).error(function (err) {
                     alert(err);
                     alert('checkIn Failed');
                 })
-
             if ($scope.checkedIn) {
                 $http.put(serviceBase + '/api/checkins/' + $scope.checkedIn._id, Data2).success(function (response) {
                     alert('checkOut success');
@@ -74,88 +74,90 @@ myApp.controller('homeController', ['$scope', '$interval', '$filter', '$ionicSid
                 })
             }
             // on hold
-            // var posOptions = {
-            //     timeout: 10000,
-            //     enableHighAccuracy: true
-            // };
-            // var lat = "12";
-            // var lng = "12";
-            // $ionicLoading.show({
-            //     noBackdrop: false,
-            //     template: '<p><ion-spinner icon="ripple" class="spinner-assertive"></ion-spinner></p>',
-            // });
+            var posOptions = {
+                timeout: 10000,
+                enableHighAccuracy: true
+            };
+            var lat = "";
+            var lng = "";
+            $ionicLoading.show({
+                noBackdrop: false,
+                template: '<p><ion-spinner icon="ripple" class="spinner-assertive"></ion-spinner></p>',
+            });
 
 
-            // $cordovaGeolocation
-            //     .getCurrentPosition(posOptions)
-            //     .then(function (position) {
+            $cordovaGeolocation
+                .getCurrentPosition(posOptions)
+                .then(function (position) {
 
-            //         lat = position.coords.latitude;
-            //         lng = position.coords.longitude;
+                    lat = position.coords.latitude;
+                    lng = position.coords.longitude;
 
-            //         //alert("Got position: " + lat + ", " + lng);
-            //         // alert(position.coords.latitude);
-            //         // alert(position.coords.longitude);
+                    //alert("Got position: " + lat + ", " + lng);
+                    // alert(position.coords.latitude);
+                    // alert(position.coords.longitude);
 
-            //         authService.login().then(function (response) {
-            //             var chkInData = {
-            //                 Email: "",
-            //                 LocationIn: lat + "," + lng,
-            //             };
-            //             checkInService.checkIn(chkInData).then(function (response) {
-            //                 //$cordovaDialogs.beep(1);
-            //                 $location.path("/views/employeeDetail");
-            //                 $ionicLoading.hide();
-            //             }, function (response) {
-            //                 var errors = [];
-            //                 if (response.data.ModelState) {
-            //                     for (var key in response.data.ModelState) {
-            //                         for (var i = 0; i < response.data.ModelState[key].length; i++) {
-            //                             errors.push(response.data.ModelState[key][i]);
-            //                         }
-            //                     }
-            //                 } else {
-            //                     errors.push(response.data.Message);
-            //                 }
-            //                 $scope.message = "Failed to register user due to:" + errors.join(' ');
-            //             });
+                    authService.login().then(function (response) {
+                        var chkInData = {
+                            email: "",
+                            locationIn: lat + "," + lng,
+                            Lat : lat,
+                            Long: lng
+                        };
+                        checkInService.checkIn(chkInData).then(function (response) {
+                            //$cordovaDialogs.beep(1);
+                            $location.path("/views/employeeDetail");
+                            $ionicLoading.hide();
+                        }, function (response) {
+                            var errors = [];
+                            if (response.data.ModelState) {
+                                for (var key in response.data.ModelState) {
+                                    for (var i = 0; i < response.data.ModelState[key].length; i++) {
+                                        errors.push(response.data.ModelState[key][i]);
+                                    }
+                                }
+                            } else {
+                                errors.push(response.data.Message);
+                            }
+                            $scope.message = "Failed to register user due to:" + errors.join(' ');
+                        });
 
+                    },
+                        function (response) {
+                            var errors = [];
+                            if (response.data.ModelState) {
+                                for (var key in response.data.ModelState) {
+                                    for (var i = 0; i < response.data.ModelState[key].length; i++) {
+                                        errors.push(response.data.ModelState[key][i]);
+                                    }
+                                }
+                            } else {
+                                errors.push(response.data.Message);
+                            }
+                            $scope.message = "Failed to register user due to:" + errors.join(' ');
+                        }); 
+                }, function (err) { 
+                    alert(JSON.stringify(err));
+                    if (error.code == PositionError.PERMISSION_DENIED) {
+                        alert("Permission denied. check setting");
+                    } else if (error.code == PositionError.POSITION_UNAVAILABLE) {
+                        alert("Cannot get position. May be problem with network or can't get a satellite fix.");
+                    } else if (error.code == PositionError.TIMEOUT) {
+                        alert("Geolocation is timed out.");
+                    } else {
+                        alert(error.message);
+                    }
+                });
 
-            //         },
-            //             function (response) {
-            //                 var errors = [];
-            //                 if (response.data.ModelState) {
-            //                     for (var key in response.data.ModelState) {
-            //                         for (var i = 0; i < response.data.ModelState[key].length; i++) {
-            //                             errors.push(response.data.ModelState[key][i]);
-            //                         }
-            //                     }
-            //                 } else {
-            //                     errors.push(response.data.Message);
-            //                 }
-            //                 $scope.message = "Failed to register user due to:" + errors.join(' ');
-            //             }); 
-            //     }, function (err) { 
-            //         alert(JSON.stringify(err));
-            //         // if (error.code == PositionError.PERMISSION_DENIED) {
-            //         //     alert("Permission denied. check setting");
-            //         // } else if (error.code == PositionError.POSITION_UNAVAILABLE) {
-            //         //     alert("Cannot get position. May be problem with network or can't get a satellite fix.");
-            //         // } else if (error.code == PositionError.TIMEOUT) {
-            //         //     alert("Geolocation is timed out.");
-            //         // } else {
-            //         //     alert(error.message);
-            //         // }
-            //     });
 
 
         }
+
         $scope.logout = function () {
             $ionicLoading.show({ template: 'Logging out....' });
             localStorageService.set('authorizationData');
             $timeout(function () {
                 $ionicLoading.hide();
-
                 $ionicHistory.clearCache();
                 $ionicHistory.clearHistory();
                 $ionicHistory.nextViewOptions({ disableBack: true, historyRoot: true });
@@ -174,26 +176,22 @@ myApp.controller('homeController', ['$scope', '$interval', '$filter', '$ionicSid
             // return the directive link function. (compile function not needed)
             return function (scope, element, attrs) {
                 var format; // date format
-
                 // used to update the UI
                 function updateTime() {
                     element.text(dateFilter(new Date(), format));
                 }
-
                 // watch the expression, and update the UI on change.
                 scope.$watch(attrs.myCurrentTime, function () {
                     format = 'hh:mm a';
                     updateTime();
                 });
                 stopTime = $interval(updateTime, 1000);
-
                 // listen on DOM destroy (removal) event, and cancel the next UI update
                 // to prevent updating time after the DOM element was removed.
                 element.on('$destroy', function () {
                     $interval.cancel(stopTime);
                 });
             }
-
         }
     ])
     .directive('myCurrentTime2', ['$interval', 'dateFilter',
@@ -201,25 +199,21 @@ myApp.controller('homeController', ['$scope', '$interval', '$filter', '$ionicSid
             // return the directive link function. (compile function not needed)
             return function (scope, element, attrs) {
                 var format2; // date format
-
                 // used to update the UI
                 function updateTime() {
                     element.text(dateFilter(new Date(), format2));
                 }
-
                 // watch the expression, and update the UI on change.
                 scope.$watch(attrs.myCurrentTime, function () {
                     format2 = ' dd MMMM yyyy';
                     updateTime();
                 });
                 stopTime = $interval(updateTime, 1000);
-
                 // listen on DOM destroy (removal) event, and cancel the next UI update
                 // to prevent updating time after the DOM element was removed.
                 element.on('$destroy', function () {
                     $interval.cancel(stopTime);
                 });
             }
-
         }
     ]);

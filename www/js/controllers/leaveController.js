@@ -148,7 +148,7 @@ myApp.controller('leaveController', ['$scope', 'leaveService', '$cordovaCalendar
             var leaveData = {
 
                 ID: ID,
-                Email: "",
+                email: "",
                 leaveType: parseInt(leaveType),
                 leaveDetail: remark,
                 leaveStartDateTime: startDate,

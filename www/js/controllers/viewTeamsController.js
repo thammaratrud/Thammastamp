@@ -1,5 +1,4 @@
 myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewTeamsService', function ($scope, $cordovaGeolocation, viewTeamsService) {
-    
     var imgPathPrefix = "img/";
     var mapOptions = {
         zoom: 15,
@@ -14,6 +13,7 @@ myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewT
     viewTeamsService.getviewTeam().then(function (results) {
         //alert("Success");
         viewTeams = results.data;
+        console.log(viewTeams);
         for (i = 0; i < viewTeams.length; i++) {
             createMarker(viewTeams[i]);
         }
