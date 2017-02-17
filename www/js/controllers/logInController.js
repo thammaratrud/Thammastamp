@@ -1,5 +1,5 @@
 'use strict';
-myApp.controller('loginController', ['$scope', '$location', 'authService', 'ngAuthSettings', 'localStorageService', function ($scope, $location, authService, ngAuthSettings, localStorageService) {
+myApp.controller('loginController', ['$scope', '$location', 'authService', 'ngAuthSettings', 'localStorageService', '$ionicLoading', function ($scope, $location, authService, ngAuthSettings, localStorageService, $ionicLoading) {
 
     $scope.loginData = {
         username: "",
@@ -10,17 +10,26 @@ myApp.controller('loginController', ['$scope', '$location', 'authService', 'ngAu
     $scope.message = "";
 
     $scope.login = function () {
+        $ionicLoading.show({
+            noBackdrop: false,
+            template: '<p><ion-spinner icon="ripple" class="spinner-assertive"></ion-spinner>Please Wait</p>',
+        });
 
         authService.login($scope.loginData).then(function (response) {
 
             $location.path('/views/home');
+            alert('Please turn on location before checkin or checkout')
+            $ionicLoading.hide();
 
         },
             function (err) {
                 $scope.message = err.error_description;
+                $ionicLoading.hide();
 
             });
+
     };
+
 
 
     // $scope.authExternalProvider = function (provider) {

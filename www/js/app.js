@@ -81,8 +81,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider)
         })
         .state('intro', {
             url: '/views/intro',
-            templateUrl: 'views/intro.html'
-            // controller: 'introController'
+            templateUrl: 'views/intro.html',
+            controller: 'introController'
         })
         .state('capture', {
             url: '/views/capture',
@@ -91,8 +91,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider)
         })
         .state('captureShareCard', {
             url: '/views/captureShareCard',
-            templateUrl: 'views/captureShareCard.html'
-            // controller: 'employeeController'
+            templateUrl: 'views/captureShareCard.html',
+            controller: 'employeeController'
         })
         .state('viewTeams', {
             url: '/views/viewTeams',

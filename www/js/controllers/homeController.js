@@ -169,7 +169,9 @@ myApp.controller('homeController', ['$scope', '$interval', '$filter', '$ionicSid
                                     $http.post(serviceBase + '/api/checkins', Data1).success(function (response) {
                                         // $scope.res = response;
                                         localStorageService.set('checked', response);
+                                        alert(JSON.stringify(res.dateTimeIn));
                                         $ionicLoading.hide();
+
                                     }).error(function (err) {
                                         alert(err);
                                         alert('checkIn Failed');
@@ -239,9 +241,11 @@ myApp.controller('homeController', ['$scope', '$interval', '$filter', '$ionicSid
                                 res.dateTimeOut = new Date();
 
                                 alert('checkin only : ' + JSON.stringify(res));
+                                alert('Check Out complete' + JSON.stringify(res.dateTimeOut))
 
 
                                 $http.put(serviceBase + '/api/checkins/' + res._id, res).success(function (response) {
+                                    localStorageService.set('checked', response);
                                     $ionicLoading.hide();
 
                                 })
@@ -265,15 +269,11 @@ myApp.controller('homeController', ['$scope', '$interval', '$filter', '$ionicSid
                                                 } else {
                                                     return $scope.data.remark;
                                                     myPopup.close();
-
-
                                                 }
                                             }
                                         }
                                     ]
                                 });
-
-
                                 myPopup.then(function (res) {
                                     var res2 = localStorageService.get('checked');
 
@@ -283,6 +283,8 @@ myApp.controller('homeController', ['$scope', '$interval', '$filter', '$ionicSid
 
 
                                     $http.put(serviceBase + '/api/checkins/' + res2._id, res2).success(function (response) {
+                                        localStorageService.set('checked', response);
+
                                         $ionicLoading.hide();
 
                                     })

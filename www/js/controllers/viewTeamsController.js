@@ -1,8 +1,8 @@
 myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewTeamsService', function ($scope, $cordovaGeolocation, viewTeamsService) {
-    var imgPathPrefix = "img/";
+    var imgPathPrefix = '';
     var mapOptions = {
         zoom: 15,
-        center: new google.maps.LatLng(13.9338659, 100.7175381),
+        center: new google.maps.LatLng(13.9339768, 100.7178051),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
 
@@ -12,8 +12,9 @@ myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewT
     var infoWindow = new google.maps.InfoWindow();
     viewTeamsService.getviewTeam().then(function (results) {
         //alert("Success");
+        console.log(results);
         viewTeams = results.data;
-        console.log(viewTeams);
+        // console.log(JSON.stringify(viewTeams));
         for (i = 0; i < viewTeams.length; i++) {
             createMarker(viewTeams[i]);
         }
@@ -63,6 +64,7 @@ myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewT
 
 
     var createMarker = function (info) {
+        console.log(info);
 
 
         // var icon = info.img;
@@ -74,7 +76,7 @@ myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewT
         // });
 
         var pictureLabel = document.createElement("img");
-        pictureLabel.src = imgPathPrefix + info.img;
+        pictureLabel.src = info.user.profileImageURL;
         pictureLabel.width = 40;
         pictureLabel.height = 40;
         var marker = new MarkerWithLabel({
@@ -82,7 +84,7 @@ myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewT
 
             map: $scope.map,
             icon: null,
-            title: info.FirstName + " " + info.LastName,
+            title: info.user.displayName,
             draggable: true,
             raiseOnDrag: true,
             labelContent: pictureLabel,
@@ -92,6 +94,8 @@ myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewT
                 opacity: 0.90
             }
         });
+        // alert(info.Lat);
+        // alert(info.Long);
 
 
         google.maps.event.addListener(marker, 'mousedown', function () {
@@ -100,7 +104,8 @@ myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewT
         });
 
         $scope.markers.push(marker);
-
+        console.log($scope.markers);
+        console.log(marker);
     }
 
 

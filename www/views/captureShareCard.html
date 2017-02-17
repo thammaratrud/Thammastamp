@@ -1,67 +1,69 @@
 <ion-content>
-    <br>
-    <div>
-        <div class="row" ng-init="shareCard()">
-            <div class="col col-20">
-                <div id="employeeDetail">
-                    <img src="{{employeeData.Image}}" style="with:100px;height:100px" class="imgRadius">
-                </div>
-            </div>
-            <div class="col col-80 text-center">
-                <h2 style="color: #FF9900;">{{employeeData.FirstName}} {{employeeData.LastName}}</h2>
-                <h4>{{employeeData.JobTitle}}</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="item item-text-wrap ebuCard" style="text-align: justify;">
-                        <!-- <p ng-bind-html="employeeData.OfficeAddress"></p> -->
-                        <p>Cyber Advance System And Network Co.,Ltd</p>
-                        <p>บริษัท ไซเบอร์ แอดวานซ์ ซิสเต็ม แอนด์ เน็ตเวิร์ก จำกัด</p>
-                        <p>55/7 ม.11 ถ.วงแหวนลำลูกกา ต.บึงคำพร้อย</p>
-                        <p>อ.ลำลูกกา จ.ปทุมธานี 12150</p>
-                        <!--                                         <p>Cyber Advance System And Network Co.,Ltd
+    <div ng-repeat="item in user.Employeeprofile">
+        <br>
+        <div>
+            <div class="row" ng-init="shareCard()">
+                <div class="col col-20">
+                    <div id="employeeDetail">
+                        <img ng-src="{{user.profileImageURL}}" style="with:100px;height:100px" class="imgRadius">
+</div>
+</div>
+<div class="col col-80 text-center">
+    <h2 style="color: #FF9900; font-size:18px;	">{{user.firstName}} {{user.lastName}}</h2>
+<h4>{{item.jobTitle}}</h4>
+</div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="item item-text-wrap ebuCard" style="text-align: justify;">
+<!-- <p ng-bind-html="employeeData.OfficeAddress"></p> -->
+<p>Cyber Advance System And Network Co.,Ltd</p>
+<p>{{item.officeAddress}}</p>
+<!--                                         <p>Cyber Advance System And Network Co.,Ltd
                     ไซเบอร์ แอดวานซ์ ซิสเต็ม แอนด์ เน็ตเวิร์ก จำกัด
                     169/50 อาคาร เอ็มที ออฟฟิต ปาร์ค ม.3 ถ.ลำลูกกา
                     ต.ลำลูกกา อ.ลำลูกกา จ.ปทุมธานี 12130</p> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-        </div>
-        <div class="row">
-            <div class="col col-20 text-right">
-                <img src="img/iconTel50.png" alt="">
-            </div>
-            <div class="col col-80 ">
-                <h4><b>{{employeeData.Tel}}</b></h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-20 text-right">
-                <img src="img/iconFacebook50.png" alt="">
-            </div>
-            <div class="col col-80 ">
-                <h4><b>{{employeeData.Facebook}}</b></h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-20 text-right">
-                <img src="img/iconLine50.png" alt="">
-            </div>
-            <div class="col col-80 ">
-                <h4><b>{{employeeData.Line}}</b></h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-20 text-right">
-                <img src="img/iconMail50.png" alt="">
-            </div>
-            <div class="col col-80 ">
-                <h4><b>{{employeeData.Email}}</b></h4>
-            </div>
-        </div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+</div>
+<div class="row">
+    <div class="col col-20 text-right">
+        <img src="img/iconTel50.png" alt="">
     </div>
+    <div class="col col-80 ">
+        <h4><b>{{item.Tel}}</b></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-20 text-right">
+        <img src="img/iconFacebook50.png" alt="">
+    </div>
+    <div class="col col-80 ">
+        <h4><b>{{item.Facebook}}</b></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-20 text-right">
+        <img src="img/iconLine50.png" alt="">
+    </div>
+    <div class="col col-80 ">
+        <h4><b>{{item.Line}}</b></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-20 text-right">
+        <img src="img/iconMail50.png" alt="">
+    </div>
+    <div class="col col-80 ">
+        <h4><b>{{item.email}}</b></h4>
+    </div>
+</div>
+<br>
+<br>
+<a href="#/views/home"><i class="ion-ios-arrow-back"></i> Back to Homepage</a>
+</div>
 </ion-content>
