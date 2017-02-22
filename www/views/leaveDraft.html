@@ -1,22 +1,23 @@
-<ion-content ng-init="loadLeaveData()">
+<ion-content>
     <div class="row row-bottom " style="text-align:left;">
-        <div class="col col-33"><a href="#/views/leaveList"><i class="ion-ios-arrow-back" style="font-size: 40px; color: #ff9900; " ></i></a></div>
+        <div class="col col-33"><a href="#/views/home"><i class="ion-ios-home" style="font-size: 40px; color: #ff9900; " ></i></a></div>
         <div class="col col-33" style="text-align:center;">
             <p style="font-size: 150%; color: #ff9900;">Leave</p>
         </div>
+        <div class="col col-33" style="text-align:right;"><a href="#/views/leaveList"><i class="ion-navicon-round" style="font-size: 40px; color: #ff9900;"></i></a></div>
     </div>
     </br>
-    <div class="row" ng-init="LeaveType()">
-        <div class="col col-27">
-            <input type="radio" ng-model="LeaveType" value="1" checked>
+    <div class="row">
+        <div class="col col-33">
+            <input type="radio" ng-model="leave.leaveType" value="Sick"  >
             <label class="radio-label">Sick Leave</label>
         </div>
-        <div class="col col-39">
-            <input type="radio" ng-model="LeaveType" value="2">
+        <div class="col col-33">
+            <input type="radio" ng-model="leave.leaveType" value="Personal">
             <label class="radio-label">Personal Leave</label>
         </div>
         <div class="col col-33">
-            <input type="radio" ng-model="LeaveType" value="3">
+            <input type="radio" ng-model="leave.leaveType" value="Annual">
             <label class="radio-label">Annual Leave</label>
         </div>
     </div>
@@ -24,31 +25,31 @@
     <div class="row row-bottom ">
         <div class="col text-left">
             <p style="font-size: 120%; font-weight: bold; ">Remark</p>
-            <textarea name="textarea" style="width:100%;height:100px;" ng-model="remark"></textarea>
+            <textarea name="textarea" style="width:100%;height:100px;" ng-model="leave.remark"></textarea>
         </div>
     </div>
-    <div class="row">
+    <div class="row" ng-if="leave.leaveHalf !== true">
         <div class="col col-50">
             <div class="item item-input-inset" style="background-color: #EEEEEE; border-style: none;">
                 <label class="item-input-wrapper typeDate">
-                    <input type="date" style="background-color: #fff; width:136px" ng-model="startDate" ng-change="dateLeave(startDate,endDate)" ng-disabled="data.active"><i class="ion-ios-calendar-outline" style="font-size: 30px; color: #ff9900;"></i>
+                    <input type="date" style="background-color: #fff; width:136px" ng-model="leave.leaveStartDateTime" ng-change="dateLeave(leave.leaveStartDateTime,leave.leaveEndDateTime)" ng-disabled="data.active"><i class="ion-ios-calendar-outline" style="font-size: 30px; color: #ff9900;"></i>
                 </label>
             </div>
         </div>
         <div class="col col-50">
             <div class="item item-input-inset" style="background-color: #EEEEEE; border-style: none;">
                 <label class="item-input-wrapper typeDate">
-                    <input type="date" style="background-color: #fff; width:136px" ng-model="endDate" ng-change="dateLeave(startDate,endDate)" ng-disabled="data.active"><i class="ion-ios-calendar-outline" style="font-size: 30px; color: #ff9900;"></i>
+                    <input type="date" style="background-color: #fff; width:136px" ng-model="leave.leaveEndDateTime" ng-change="dateLeave(leave.leaveStartDateTime,leave.leaveEndDateTime)" ng-disabled="data.active"><i class="ion-ios-calendar-outline" style="font-size: 30px; color: #ff9900;"></i>
                 </label>
             </div>
         </div>
     </div>
-    <div ng-hide="endDate>startDate || endDate<startDate">
+    <div ng-hide="leave.leaveEndDateTime>leave.leaveStartDateTime || leave.leaveEndDateTime<leave.leaveStartDateTime" ng-if="!leave.leaveStartDateTime">
         <hr>
         <li class="item item-toggle" style="font-weight: bold; background-color: #EEEEEE; border-style: none;">
             Half-Day
             <label class="toggle toggle-balanced">
-                <input type="checkbox" ng-click="toggle()" ng-model="toggles">
+                <input type="checkbox" ng-click="toggle()">
                 <div class="track">
                     <div class="handle"></div>
                 </div>
@@ -56,12 +57,12 @@
         </li>
     </div>
     <hr>
-    <div class="row" ng-hide="data.active">
+    <div class="row" ng-if="leave.leaveTime > 0">
         <div class="col col-20 text-left">
             <p style="font-size: 120%; font-weight: bold;">จำนวน</p>
         </div>
         <div class="col col-60 text-center" style="margin-top: -10px; margin-top: -6px;">
-            <input type="text" ng-model="diffDays" style="background-color: #EEEEEE; text-align:center; width: inherit;" ng-disabled="datas(startDate, endDate)" readonly>
+            <input type="text" ng-model="leave.leaveTime" style="background-color: #EEEEEE; text-align:center; width: inherit;" ng-disabled="datas(startDate, endDate)" readonly>
         </div>
         <div class="col col-20 text-right">
             <p style="font-size: 120%; font-weight: bold;">วัน</p>
@@ -80,18 +81,18 @@
     </div> -->
     <div class="row">
         <div class="col text-left">
-            <button class="button button-block button-balanced" ng-click="saveLeave(LeaveType,remark,startDate,endDate,diffDays)">
+            <button class="button button-block button-balanced" ng-click="saveLeave()">
                 Save
             </button>
         </div>
         <div class="col text-center">
-            <button class="button button-block button-calm" ng-disabled="endDate < startDate ? true : !remark ? true : false  || check(startDate)" ng-click="sendLeave(LeaveType,remark,startDate,endDate,diffDays)">
+            <button class="button button-block button-calm" ng-click="sendLeave()">
                 Send
             </button>
         </div>
         <div class="col text-right">
-            <button class="button button-block button-dark" ng-click="remark = '' ">
-                Cancel
+            <button class="button button-block button-dark" ng-click="Cancel2()">
+                Remove
             </button>
         </div>
     </div>

@@ -1,4 +1,4 @@
-myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewTeamsService', function ($scope, $cordovaGeolocation, viewTeamsService) {
+myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewTeamsService','$timeout','$window', function ($scope, $cordovaGeolocation, viewTeamsService, $timeout, $window) {
     var imgPathPrefix = '';
     var mapOptions = {
         zoom: 15,
@@ -10,17 +10,24 @@ myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewT
     $scope.markers = [];
     var viewTeams = [];
     var infoWindow = new google.maps.InfoWindow();
-    viewTeamsService.getviewTeam().then(function (results) {
-        //alert("Success");
-        console.log(results);
-        viewTeams = results.data;
-        // console.log(JSON.stringify(viewTeams));
-        for (i = 0; i < viewTeams.length; i++) {
-            createMarker(viewTeams[i]);
-        }
-    }, function (error) {
-        alert(error.data.message);
-    });
+    $scope.readTeamView = function () {
+        viewTeamsService.getviewTeam().then(function (results) {
+            //alert("Success");
+            // console.log(results);
+            viewTeams = results.data;
+            // console.log(viewTeams);
+            for (i = 0; i < viewTeams.length; i++) {
+                createMarker(viewTeams[i]);
+            }
+        }, function (error) {
+            alert(error.data.message);
+        });
+        $timeout(function () {
+            $window.location.reload(true)
+        }, 20000);
+    };
+    $scope.readTeamView();
+
 
 
     //Data
@@ -64,8 +71,51 @@ myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewT
 
 
     var createMarker = function (info) {
-        console.log(info);
+        // console.log('info' + JSON.stringify(info.dateTimeIn));
+        var dateObj = new Date();
+        var dateOld = new Date(info.dateTimeIn);
+        var month = dateObj.getUTCMonth() + 1; //months from 1-12
+        var day = dateObj.getUTCDate();
+        var year = dateObj.getUTCFullYear();
+        var monthCheck = dateOld.getUTCMonth() + 1;
+        var dayCheck = dateOld.getUTCDate();
+        var yearCheck = dateOld.getUTCFullYear();
+        // newdate = year + "/" + month + "/" + day;
+        if (day === dayCheck && month === monthCheck && year === yearCheck) {
 
+            var pictureLabel = document.createElement("img");
+            pictureLabel.src = info.user.profileImageURL;
+            pictureLabel.width = 40;
+            pictureLabel.height = 40;
+            var marker = new MarkerWithLabel({
+                position: new google.maps.LatLng(info.Lat, info.Long),
+
+
+                map: $scope.map,
+                icon: null,
+                title: info.user.displayName,
+                draggable: true,
+                raiseOnDrag: true,
+                labelContent: pictureLabel,
+                labelAnchor: new google.maps.Point(20, 50),
+                labelClass: "labels", // the CSS class for the label
+                labelStyle: {
+                    opacity: 0.90
+                }
+            });
+
+            // alert(info.Lat);
+            // alert(info.Long);
+
+
+            google.maps.event.addListener(marker, 'mousedown', function () {
+                infoWindow.setContent(marker.title);
+                infoWindow.open($scope.map, marker);
+            });
+
+            $scope.markers.push(marker);
+            console.log($scope.markers);
+        }
 
         // var icon = info.img;
         // var marker = new google.maps.Marker({
@@ -75,37 +125,7 @@ myApp.controller('viewTeamsController', ['$scope', '$cordovaGeolocation', 'viewT
         //     title: info.FirstName + " " + info.LastName
         // });
 
-        var pictureLabel = document.createElement("img");
-        pictureLabel.src = info.user.profileImageURL;
-        pictureLabel.width = 40;
-        pictureLabel.height = 40;
-        var marker = new MarkerWithLabel({
-            position: new google.maps.LatLng(info.Lat, info.Long),
-
-            map: $scope.map,
-            icon: null,
-            title: info.user.displayName,
-            draggable: true,
-            raiseOnDrag: true,
-            labelContent: pictureLabel,
-            labelAnchor: new google.maps.Point(20, 50),
-            labelClass: "labels", // the CSS class for the label
-            labelStyle: {
-                opacity: 0.90
-            }
-        });
-        // alert(info.Lat);
-        // alert(info.Long);
-
-
-        google.maps.event.addListener(marker, 'mousedown', function () {
-            infoWindow.setContent(marker.title);
-            infoWindow.open($scope.map, marker);
-        });
-
-        $scope.markers.push(marker);
-        console.log($scope.markers);
-        console.log(marker);
+        // console.log(marker);
     }
 
 

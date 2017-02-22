@@ -5,29 +5,29 @@ myApp.factory('leaveService', ['$http', 'ngAuthSettings', 'localStorageService',
     var deviceData = localStorageService.get('deviceData');
 
 
-    var _createLeaves = function(leaveData) {
-        // var authData = localStorageService.get('authorizationData');
-        // if (authData) {
-        // }
+    // var _createLeaves = function(leaveData) {
+    //     // var authData = localStorageService.get('authorizationData');
+    //     // if (authData) {
+    //     // }
 
-        leaveData.Email = deviceData.Email;
-        return $http.get(serviceBase + '/api/leaves').then(function(results) {
+    //     // leaveData.Email = deviceData.email;
+    //     return $http.post(serviceBase + '/api/leaves').then(function(results) {
 
-            if (!leaveData.ID) {
+    //         if (!leaveData.ID) {
 
-                return $http.post(serviceBase + '/api/leaves', leaveData).then(function(results) {
-                    return results;
-                });
-            } else {
+    //             return $http.post(serviceBase + '/api/leaves', leaveData).then(function(results) {
+    //                 return results;
+    //             });
+    //         } else {
 
-                return $http.put(serviceBase + '/api/leaves'+ leaveData._ID, leaveData).then(function(results) {
-                    return results;
-                });
-            }
+    //             return $http.put(serviceBase + '/api/leaves'+ leaveData._ID, leaveData).then(function(results) {
+    //                 return results;
+    //             });
+    //         }
 
-        });
+    //     });
 
-    };
+    // };
 
     // var _updateLeaves = function() {
     //     var authData = localStorageService.get('authorizationData');
@@ -66,7 +66,7 @@ myApp.factory('leaveService', ['$http', 'ngAuthSettings', 'localStorageService',
         // var authData = localStorageService.get('authorizationData');
         // if (authData) {           
         // }
-        var Email1 = deviceData.Email;
+        // var Email1 = deviceData.Email;
         return $http.get(serviceBase + '/api/leaves').then(function(results) {
             return results;
         });
@@ -101,7 +101,7 @@ myApp.factory('leaveService', ['$http', 'ngAuthSettings', 'localStorageService',
     //     }
     // };
 
-    leaveServiceFactory.createLeaves = _createLeaves;
+    // leaveServiceFactory.createLeaves = _createLeaves;
     // leaveServiceFactory.updateLeaves = _updateLeaves;
     // leaveServiceFactory.approveLeaves = _approveLeaves;
     // leaveServiceFactory.rejectLeaves = _rejectLeaves;

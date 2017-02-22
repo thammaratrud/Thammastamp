@@ -1,5 +1,5 @@
 'use strict';
-myApp.factory('authService', ['$http', '$q', 'ngAuthSettings', 'localStorageService', function ($http, $q, ngAuthSettings, localStorageService) {
+myApp.factory('authService', ['$http', '$q', 'ngAuthSettings', 'localStorageService', '$cordovaDevice', function ($http, $q, ngAuthSettings, localStorageService, $cordovaDevice) {
 
     var serviceBase = ngAuthSettings.apiServiceBaseUri;
     var authServiceFactory = {};
@@ -40,12 +40,14 @@ myApp.factory('authService', ['$http', '$q', 'ngAuthSettings', 'localStorageServ
     var _login = function (loginData) {
 
         // var deviceData = localStorageService.get('deviceData');
-        localStorageService.clearAll();
+        localStorageService.clearAll();    
+        var device = $cordovaDevice.getUUID();
+
 
         // var pass = 'Usr#Pass1234';
         loginData = {
             username: loginData.username,
-            password: loginData.password,
+            password: device + '#TimeStamp',
             useRefreshTokens: false
         };
 

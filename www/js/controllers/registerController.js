@@ -1,9 +1,10 @@
 'use strict';
-myApp.controller('registerController', ['$scope', '$location', '$timeout', 'authService', '$ionicPopup', '$http', function ($scope, $location, $timeout, authService, $ionicPopup, $http) {
+myApp.controller('registerController', ['$scope', '$location', '$timeout', 'authService', '$ionicPopup', '$http', '$cordovaDevice', function ($scope, $location, $timeout, authService, $ionicPopup, $http, $cordovaDevice) {
 
     $scope.savedSuccessfully = false;
     $scope.message = "";
-    // var device = $cordovaDevice.getUUID();
+    var device = $cordovaDevice.getUUID();
+    // alert(device);
 
     $scope.registration = $scope.registration || {};
 
@@ -17,15 +18,16 @@ myApp.controller('registerController', ['$scope', '$location', '$timeout', 'auth
             var firstname = response.data.firstname;
             var lastname = response.data.lastname;
             var emp = response.data.employees;
-            // var pass = data.DeviceID.substring(0, 2) + '#Dv0' + data.DeviceID.substring(2, 4);
+            var pass = device + '#TimeStamp';
             $scope.registration = {
                 firstName: firstname,
                 lastName: lastname,
                 username: $scope.registration.email,
                 email: $scope.registration.email,
-                password: 'Usr#Pass1234',
+                password: pass,
                 Employeeprofile: emp
             };
+            // alert(JSON.stringify($scope.registration));
 
             authService.saveRegistration($scope.registration).then(function (response) {
 

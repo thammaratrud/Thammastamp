@@ -1,9 +1,10 @@
 'use strict';
-myApp.controller('loginController', ['$scope', '$location', 'authService', 'ngAuthSettings', 'localStorageService', '$ionicLoading', function ($scope, $location, authService, ngAuthSettings, localStorageService, $ionicLoading) {
+myApp.controller('loginController', ['$scope', '$location', 'authService', 'ngAuthSettings', 'localStorageService', '$ionicLoading', '$cordovaDevice', function ($scope, $location, authService, ngAuthSettings, localStorageService, $ionicLoading, $cordovaDevice) {
+    // var device = $cordovaDevice.getUUID();
+    
 
     $scope.loginData = {
         username: "",
-        password: "",
         useRefreshTokens: false
     };
 

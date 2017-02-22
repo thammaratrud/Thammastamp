@@ -1,14 +1,27 @@
 'use strict';
 myApp.controller('employeeController', ['$scope', 'employeeService', '$location', '$timeout',
-    '$ionicLoading', '$templateCache', '$ionicPopup', '$filter', 'localStorageService',
+    '$ionicLoading', '$templateCache', '$ionicPopup', '$filter', 'localStorageService', '$http',
     function ($scope, employeeService, $location, $timeout,
-        $ionicLoading, $templateCache, $ionicPopup, $filter, localStorageService) {
+        $ionicLoading, $templateCache, $ionicPopup, $filter, localStorageService, $http) {
 
         $scope.user = localStorageService.get('authorizationData');
+            // alert(JSON.stringify( $scope.user));
         // console.log($scope.user);
         $scope.data = localStorageService.get('checked');
-        console.log($scope.data);
+        // console.log($scope.data);
 
+        $scope.var = 1;
+        $scope.click = function (num) {
+            $scope.var = num;
+        }
+        $http.get(serviceBase + '/api/leaves').success(function (response) {
+            $scope.leaveData = response;
+            // alert(JSON.stringify( $scope.leaveData));
+        })
+         $http.get(serviceBase + '/api/checkins').success(function (response) {
+            $scope.dateData = response;
+            // alert(JSON.stringify( $scope.leaveData));
+        })
 
         // $scope.startDates = new Date(), 'dd/MM/yyyy';
 

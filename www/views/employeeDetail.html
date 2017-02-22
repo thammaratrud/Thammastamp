@@ -17,7 +17,7 @@
 </a>
 </div>
 <br>
-<p style="font-size: 150%;">{{user.firstName}} {{user.lastName}}</p>
+<p style="color: #FF9900; font-size: 150%;">{{user.firstName}} {{user.lastName}}</p>
 <br>
 <div ng-repeat="items in user.Employeeprofile">
     <div class="row">
@@ -25,7 +25,8 @@
             <i class="ion-android-arrow-dropright-circle" style="color: green; font-size: 80px;"></i>
 </div>
 <div class="col col-66 text-left">
-    <h4 style="color: green; font-size:20px;">{{data.dateTimeIn | date:'dd MMMM yyyy'}}</h4>
+
+    <h4 style="color: green; font-size:20px;">{{data.dateTimeIn |date:'medium'}}</h4>
 </div>
 </div>
 <div class="row">
@@ -33,7 +34,7 @@
         <i class="ion-android-arrow-dropleft-circle" style="color: red; font-size: 80px;"></i>
 </div>
 <div class="col col-66 text-left">
-    <h4 style="color: red; font-size:20px;">{{data.dateTimeOut | date:'dd MMMM yyyy'}}</h4>
+    <h4 style="color: red; font-size:20px;">{{data.dateTimeOut |date:'medium'}}</h4>
 </div>
 </div>
 </div>
@@ -55,22 +56,6 @@
 </div>
 <br>
 <div class="row">
-    <div class="col col-50 ">
-        <canvas tc-chartjs-doughnut="" chart-options="options" chart-data="dataSummary" chart-legend="doughnutChart1"></canvas>
-    </div>
-    <div class="col col-10 text-center ">
-        <i class="ion-android-checkbox-blank" style="color: #BBBBBB; font-size: 25px;"></i>
-<i class="ion-android-checkbox-blank" style="color: #00DD00; font-size: 25px;"></i>
-<i class="ion-android-checkbox-blank" style="color: #FF9900; font-size: 25px;"></i>
-</div>
-<div class="col col-40 text-left">
-    <p>จำนวนวันคงเหลือ</p>
-    <p>จำนวนวันที่ทำงาน</p>
-    <p>จำนวนวันที่ลา</p>
-</div>
-</div>
-<hr>
-<div class="row">
     <div class="col col-10">
     </div>
     <div class="col col-80 text-center">
@@ -84,39 +69,47 @@
 </div>
 <div ng-show="var=='1'" class="scrollArea">
     <div class="list ">
-        <a href="#" class="item item-icon-left " style="background-color: #EEEEEE;" ng-repeat="item in CheckIn | orderBy:'-DateTimeIn' " ng-hide="chkDateInMonth(item.DateTimeIn)">
-<!--                         <i class="icon ion-ios-calendar-outline" style="color: #ff9900;"></i>
-                        <h2 style="font-weight: bold;">01 December 2015</h2>
-                        <div class="row">
-                        <i class="ion-android-arrow-dropright-circle" style="color: green; font-size: 20px;"></i><p>09.00 AM</p>
-                        <i class="ion-android-arrow-dropleft-circle" style="color: red; font-size: 20px;"></i><p>08.02 PM</p>
-                        </div> -->
-<i class="icon ion-android-calendar" style="color: #ff9900;"></i>
-<h2 style="font-weight: bold;">item.DateTimeIn | date:'dd MMMM yyyy'</h2>
+        <a class="item item-icon-left " style="background-color: #EEEEEE;" ng-repeat="timer in dateData"ng-if="user._id === timer.user._id">
+<i class="icon ion-ios-calendar-outline" style="color: #ff9900;"></i>
+{{timer.dateTimeIn |date:'dd MMMM yyyy'}}
 <div class="row">
-    <div class="col col-10 ">
+    <i class="ion-android-arrow-dropright-circle" style="color: green; font-size: 20px;"></i>
+&nbsp;
+<p>{{timer.dateTimeIn |date:'h:mma'}}</p> &nbsp;
+<i class="ion-android-arrow-dropleft-circle" style="color: red; font-size: 20px;"></i>
+&nbsp;
+<p>{{timer.dateTimeIn |date:'h:mma'}}</p> &nbsp;
+</div>
+<i class="icon ion-android-calendar" style="color: #ff9900;"></i>
+<!--<h2 style="font-weight: bold;">data.dateTimeIn | date:'dd MMMM yyyy'</h2>-->
+<div class="row">
+    <!--<div class="col col-10 ">
         <i class="ion-android-arrow-dropright-circle" style="color: green; font-size: 20px;"></i>
-</div>
-<div class="col col-25">
-    <p>{{item.DateTimeIn | date:'hh:mm a':'GMT+14:00'}}</p>
-</div>
-<div class="col col-10">
+</div>-->
+    <!--<div class="col col-25">
+        <p>{{data.dateTimeIn |date:'medium'}}</p>
+
+
+    </div>-->
+    <!--<div class="col col-10">
     <i class="ion-android-arrow-dropleft-circle" style="color: red; font-size: 20px;"></i>
-</div>
-<div class="col col-25">
-    <p>{{item.DateTimeOut | date:'hh:mm a':'GMT+14:00'}}</p>
-</div>
+</div>-->
+    <!--<div class="col col-25">
+        <p>{{data.dateTimeOut |date:'medium'}}</p>
+
+    </div>-->
 </div>
 </a>
 </div>
 </div>
 <div ng-show="var=='2'" class="scrollArea">
     <div class="list">
-        <a ng-click="showDetailLeave(item)" class="item item-icon-left" style="background-color: #EEEEEE;" ng-repeat=" item in getLeavesData | orderBy:'-LeaveStartDateTime'" ng-show="item.ApproveStatus =='A' && Leaved(item.LeaveStartDateTime)">
+
+        <a ng-click="showDetailLeave(item)" class="item item-icon-left" style="background-color: #EEEEEE;" ng-repeat="item in leaveData "ng-if="user._id === item.user._id">
 <i class="icon ion-android-calendar" style="color: #ff9900;"></i>
-<h2 style="font-weight: bold;">{{item.LeaveType == 1 ? "Sick Leave" : item.LeaveType == 2 ? "Personal Leave " : item.LeaveType == 3 ? "Annual Leave" :
-false}} | {{item.LeaveStartDateTime | date : 'dd MMMM yyyy'}}</h2>
-<p>item.LeaveDetial</p>
+<h2 style="font-weight: bold;">{{item.leaveType}} Leave : {{item.leaveStartDateTime ? item.leaveStartDateTime : '' | date: 'dd/MM/yyyy'}} {{item.leaveHalf
+=== true ? 'ลาครึ่งวัน' : ''}}</h2>
+<p>{{item.remark}}</p>
 </a>
 </div>
 </div>
@@ -138,28 +131,28 @@ false}} | {{item.LeaveStartDateTime | date : 'dd MMMM yyyy'}}</h2>
 <div class="row">
     <div class="col col-10">
     </div>
-    <div class="col col-80 text-center">
+    <!--<div class="col col-80 text-center">
         <div class="button-bar">
             <a class="button" ng-class="var==1?'button-balanced':'button-stable'" ng-click="click(1)">Leave</a>
             <a class="button" ng-class="var==2?'button-balanced':'button-stable'" ng-click="click(2)">Adjust</a>
         </div>
-    </div>
+    </div>-->
     <div class="col col-10">
     </div>
 </div>
-<div ng-show="var=='1'" class="scrollAreas">
+<div>
     <div class="list">
-        <a ng-click="showDetailLeave(item)" class="item item-icon-left" style="background-color: #EEEEEE;" ng-repeat="item in getLeavesData | orderBy:'LeaveStartDateTime'" ng-hide="item.ApproveStatus =='S' || chkDateInDay(item.LeaveStartDateTime)"
->
+        <a ng-click="showDetailLeave(item)" class="item item-icon-left" style="background-color: #EEEEEE;" ng-repeat="item in leaveData " ng-if="user._id === item.user._id">
 <i class="icon ion-android-calendar" style="color: #ff9900;" ></i>
-<h2 style="font-weight: bold;">item.LeaveType == 1 ? "Sick Leave" : item.LeaveType == 2 ? "Personal Leave " : item.LeaveType == 3 ? "Annual Leave" : false}}
-| {{item.LeaveStartDateTime | date : 'dd MMMM yyyy'}}</h2>
-<p>{{item.LeaveDetial}}</p>
-<span class="badgeleave {{item.ApproveStatus =='A' ? 'badge-adjust' : item.ApproveStatus =='W' ? 'badge-wait' : 'badge-reject'}}"><p id="fontStatus">{{item.ApproveStatus}}</p></span>
+<h2 style="font-weight: bold;">{{item.leaveType}} Leave : {{item.leaveStartDateTime ? item.leaveStartDateTime : '' | date: 'dd/MM/yyyy'}} {{item.leaveHalf
+=== true ? 'ลาครึ่งวัน' : ''}}</h2>
+<p>{{item.remark}}</p>
+<p style="color: red;">สถานะ: {{item.leaveStatus }} </p>
+<!--<span class="badgeleave {{item.ApproveStatus =='A' ? 'badge-adjust' : item.ApproveStatus =='W' ? 'badge-wait' : 'badge-reject'}}"><p id="fontStatus">{{item.ApproveStatus}}</p></span>-->
 </a>
 </div>
 </div>
-<div ng-show="var=='2'" class="scrollAreas">
+<!--<div ng-show="var=='2'" class="scrollAreas">
     <div class="list">
         <a href="#" class="item item-icon-left" style="background-color: #EEEEEE;" ng-repeat="item in adjust">
 <i class="icon ion-android-calendar" style="color: #ff9900;"></i>
@@ -167,8 +160,9 @@ false}} | {{item.LeaveStartDateTime | date : 'dd MMMM yyyy'}}</h2>
 <p>item.adjustDetail</p>
 <span class="badgeleave {{item.adjustStatus =='A' ? 'badge-adjust' : item.adjustStatus =='W' ? 'badge-wait' : 'badge-reject'}}"><p id="fontStatus">{{item.adjustStatus}}</p></span>
 </a>
+</a>
 </div>
-</div>
+</div>-->
 </ion-tab>
 </ion-tabs>
 </ion-view>
